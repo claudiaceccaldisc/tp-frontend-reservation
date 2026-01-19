@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Base */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #eef1f6;
+  color: #2c3e50;
+}
+
+/* Conteneur principal */
+.container {
+  max-width: 650px;
+  margin: 60px auto;
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Titres */
+h1 {
+  margin-top: 0;
+  text-align: center;
+  color: #34495e;
+}
+
+h2 {
+  margin-top: 20px;
+  color: #3f51b5;
+}
+
+/* Listes */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+li {
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  background: #f4f6fb;
+  border-left: 5px solid #3f51b5;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+li:hover {
+  background: #e8ebf7;
+}
+
+/* Boutons */
+button {
+  background-color: #3f51b5;
+  color: #ffffff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background-color: #303f9f;
+}
+
+button:disabled {
+  background-color: #9fa8da;
+  cursor: not-allowed;
+}
+
+/* Messages */
+.message {
+  text-align: center;
+  padding: 20px;
+  margin: 20px 0;
+  background: #f9f9fc;
+  border-radius: 6px;
+  font-style: italic;
+  color: #555;
+}
+
+/* Messages d'erreur */
+.message.error {
+  background: #fdecea;
+  color: #c0392b;
+}
+
+/* Message succès */
+.message.success {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
