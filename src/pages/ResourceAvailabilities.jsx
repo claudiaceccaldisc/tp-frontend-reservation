@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { getAvailabilities } from "../services/api";
+import ReservationForm from "../components/ReservationForm";
 
 function ResourceAvailabilities({ resource, onBack }) {
   const [state, setState] = useState("loading");
   const [slots, setSlots] = useState([]);
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const [reservationDone, setReservationDone] = useState(false);
 
   useEffect(() => {
     getAvailabilities(resource.id)
@@ -18,6 +21,17 @@ function ResourceAvailabilities({ resource, onBack }) {
       .catch(() => setState("error"));
   }, [resource.id]);
 
+  if (reservationDone) {
+    return (
+      <>
+        <p className="message success">
+          Réservation effectuée avec succès.
+        </p>
+        <button onClick={onBack}>Retour aux ressources</button>
+      </>
+    );
+  }
+
   return (
     <>
       <button onClick={onBack}>← Retour</button>
@@ -28,7 +42,7 @@ function ResourceAvailabilities({ resource, onBack }) {
       )}
 
       {state === "error" && (
-        <p className="message">
+        <p className="message error">
           Impossible de charger les disponibilités.
         </p>
       )}
@@ -39,12 +53,22 @@ function ResourceAvailabilities({ resource, onBack }) {
         </p>
       )}
 
-      {state === "success" && (
+      {state === "success" && !selectedSlot && (
         <ul>
           {slots.map((slot, index) => (
-            <li key={index}>{slot}</li>
+            <li key={index} onClick={() => setSelectedSlot(slot)}>
+              {slot}
+            </li>
           ))}
         </ul>
+      )}
+
+      {selectedSlot && (
+        <ReservationForm
+          resource={resource}
+          slot={selectedSlot}
+          onSuccess={() => setReservationDone(true)}
+        />
       )}
     </>
   );
