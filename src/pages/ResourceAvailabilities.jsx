@@ -27,7 +27,7 @@ function ResourceAvailabilities({ resource, onBack }) {
       .catch(() => setState("error"));
   }, [resource.id]);
 
-  /* ---------- ANNULATION ---------- */
+  /* -------- ANNULATION -------- */
   const handleCancel = () => {
     setCancelState("loading");
 
@@ -42,7 +42,7 @@ function ResourceAvailabilities({ resource, onBack }) {
       });
   };
 
-  /* ---------- ÉTATS ---------- */
+  /* -------- ÉTATS GLOBAUX -------- */
 
   if (state === "loading") {
     return <Loader text="Chargement des disponibilités…" />;
@@ -67,7 +67,7 @@ function ResourceAvailabilities({ resource, onBack }) {
     );
   }
 
-  /* ---------- SUCCÈS ---------- */
+  /* -------- SUCCÈS -------- */
   return (
     <>
       <button className="back" onClick={onBack}>← Retour</button>
@@ -93,12 +93,17 @@ function ResourceAvailabilities({ resource, onBack }) {
         />
       )}
 
-      {/* CONFIRMATION + ANNULATION */}
+      {/* RÉSUMÉ DE LA RÉSERVATION */}
       {reservation && (
         <>
           <p className="message success">
             Réservation effectuée avec succès.
           </p>
+
+          <div className="reservation-summary">
+            <strong>Votre réservation :</strong><br />
+            {resource.name} – {reservation.date} – {reservation.slot}
+          </div>
 
           {cancelState === "error" && (
             <p className="message error">
